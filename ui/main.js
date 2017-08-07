@@ -26,8 +26,7 @@ button.onclick=function(){
 };
 
 //submit name
-var nameInput=document.getElementById('name');
-var name=nameInput.value;
+
 var submit=document.getElementById('Submit_btn');
 submit.onclick=function(){
      //Create a request object 
@@ -54,6 +53,8 @@ submit.onclick=function(){
   };
   
   //make the request
+  var nameInput=document.getElementById('name');
+  var name=nameInput.value;
   request.open('GET','http://giraffesmruthi.imad.hasura-app.io/submit-name?name='+name,true);
   request.send('null');
 };
