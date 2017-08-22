@@ -21,20 +21,7 @@ app.get('/', function (req, res) {
 });
 
 var pool=new Pool(config);
-app.get('/test-db', function (req, res) {
-  //make a select request
-  //return a response with result
-  pool.query('Select * from test',function(err,result){
-      if(err)
-      {
-        res.status(500).send(err.toString()); 
-      }
-      else 
-      {
-          res.send(JSON.stringify(result.rows));
-      }
-  });
-});
+
 
 
 
@@ -75,7 +62,7 @@ app.get('/articles/:articleName',function(req,res){
    
    var articleName=req.params.articleName;
    
-   pool.query("SELECT * FROM article WHERE title = '" + req.params.articleName + "'", function(err,result){
+   pool.query("select * from article where title = '" + req.params.articleName + "'", function(err,result){
        if(err)
        {
            res.status(500).send(err.toString()); 
@@ -97,77 +84,6 @@ app.get('/articles/:articleName',function(req,res){
 
 
 
-
-
-
-
-var express = require('express');
-var morgan = require('morgan');
-var path = require('path');
-
-var app = express();
-app.use(morgan('combined'));
-
-
-var pool= new Pool();
-
-//create a pool thread globally so that its there for the life time
-
-//make a connection pool create db config
-
-var articles = {
-'article-one' : {
-title: 'Article one | Rekha',
-heading: 'Article one',
-date: 'aug 01 2017',
-content: 
-<p>
-Human race needs to fight the Aliens 
-Human need to build bouts carefuly so that they avoid wars between machines
-And beteen man & machine
-</p>
-<p>
-Human race needs to fight the Aliens 
-Human need to build bouts carefuly so that they avoid wars between machines
-And beteen man & machine
-</p>
-},
-'article-two':{
-title: 'Article two | Deepa Rekha',
-heading: 'Article two',
-date: 'aug 02 2017',
-content: 
-<p>
-two Human race needs to fight the Aliens 
-two Human need to build bouts carefuly so that they avoid wars between machines
-two And beteen man & machine
-</p>
-<p>
-three Human race needs to fight the Aliens 
-three Human need to build bouts carefuly so that they avoid wars between machines
-three And beteen man & machine
-</p>
-},
-'article-three': {
-title: 'Article three | Deepa',
-heading: 'Article three',
-date: 'aug 03 2017',
-content: 
-<p>
-Human race needs to fight the Aliens 
-Human need to build bouts carefuly so that they avoid wars between machines
-And beteen man & machine
-</p>
-<p>
-Human race needs to fight the Aliens 
-Human need to build bouts carefuly so that they avoid wars between machines
-And beteen man & machine
-</p>
-
-}
-};
-
-//takes a document obj
 
 // Do not change port, otherwise your app won't run on IMAD servers
 // Use 8080 only for local development if you already have apache running on 80
