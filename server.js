@@ -4,6 +4,7 @@ var Pool=require('pg').Pool;
 var path = require('path');
 var crypto=require('crypto');
 var bodyparser=require('body-parser');
+var session=require('express-session');
 
 var config={
 
@@ -18,7 +19,10 @@ var config={
 var app = express();
 app.use(morgan('combined'));
 app.use(bodyparser.json());
-
+app.use(session({
+    secret:'somerandomsecretvalue',
+    cookie:{maxAge:1000*60*60*24*30}
+}))
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
@@ -90,6 +94,12 @@ app.post('/login',function(req,res){
               var salt=dbString.split('$')[2];
               var hashedPassword=hash(password,salt);
               if(hashedPassword===dbString){
+                  
+                  //set session
+                  req.session.autho={userId:result.rows[0].id};
+                  
+                  
+                  
                   res.send('Credentials Created');
               }
               else
@@ -99,6 +109,17 @@ app.post('/login',function(req,res){
           }
       }
     });
+});
+
+
+app.get('/check-login',function(req,res){
+   if(req.session && req.session.auth && res.session.autho.userId){
+       res.send('You are logged in'+req.session.autho.userId.toString());
+   }
+   else
+   {
+       res.send('You are not logged in');
+   }
 });
 
 
