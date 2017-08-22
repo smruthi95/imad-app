@@ -69,6 +69,7 @@ app.get('/submit-name',function(req,res){// URL:/submit-name?name=xxxxx
 
 app.get('/articles/:articleName',function(req,res){
    //articleName==article-one
+   
    var articleName=req.params.articleName;
    
    pool.query("SELECT * FROM Article WHERE title = '" + req.params.articleName + "'",function(err,result){
