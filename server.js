@@ -7,7 +7,7 @@ var config={
 
     user:'giraffesmruthi',
     database: 'giraffesmruthi',
-    host: 'http://db.imad.hasura-app.io',
+    host: 'https://imad.hasura.io/test-db',
     port: '5432',
     password:process.env.DB.PASSWORD
     
