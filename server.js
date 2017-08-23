@@ -97,7 +97,6 @@ app.post('/login',function(req,res){
               if(hashedPassword===dbString){
                   //set session
                   req.session.auth={userId:result.rows[0].id};
-                  
                   res.send('Credentials Created');
               }
               else
@@ -112,7 +111,7 @@ app.post('/login',function(req,res){
 
 app.get('/check-login',function(req,res){
    if(req.session && req.session.auth && res.session.auth.userId){
-       res.send('You are logged in'+req.session.auth.userId.toString());
+       res.send('You are logged in'+req.session.autho.userId.toString());
    }
    else
    {
