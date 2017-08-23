@@ -20,8 +20,8 @@ var app = express();
 app.use(morgan('combined'));
 app.use(bodyparser.json());
 app.use(session({
-    secret:'somerandomsecretvalue',
-    cookie:{maxAge:1000*60*60*24*30}
+    secret:'SomeRandomSecretValue',
+    cookie:{maxAge:1000 * 60 * 60 * 24 *30}
 }));
 
 app.get('/', function (req, res) {
@@ -96,7 +96,7 @@ app.post('/login',function(req,res){
               var hashedPassword=hash(password,salt);
               if(hashedPassword===dbString){
                   //set session
-                  req.session.auth={userId:result.rows[0].id};
+                  req.session.auth= {userId: result.rows[0].id};
                   res.send('Credentials Created');
               }
               else
@@ -107,7 +107,6 @@ app.post('/login',function(req,res){
       }
     });
 });
-
 
 app.get('/check-login',function(req,res){
    if(req.session && req.session.auth && res.session.auth.userId){
