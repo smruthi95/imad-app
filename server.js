@@ -22,7 +22,7 @@ app.use(bodyparser.json());
 app.use(session({
     secret:'somerandomsecretvalue',
     cookie:{maxAge:1000*60*60*24*30}
-}))
+}));
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
@@ -120,7 +120,7 @@ app.get('/check-login',function(req,res){
 });
 
 app.get('/log-out',function(req,res){
-   delete result.session.auth;
+   delete req.session.auth;
    res.send('Logged out!');
 });
 
