@@ -119,6 +119,11 @@ app.get('/check-login',function(req,res){
    }
 });
 
+app.get('/log-out',function(req,res){
+   delete result.session.auth;
+   res.send('Logged out!');
+});
+
 
 var counter=0;
 app.get('/counter',function(req,res){
